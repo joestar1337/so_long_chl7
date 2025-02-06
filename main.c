@@ -123,13 +123,13 @@ void ft_left(t_data *data)
         }
         p_y++;
     }
-    if (map[y][x + 1] == '1')
-        return;
+    if (map[y][x - 1] == '1')
+        return ;
     else
     {
-        mlx_put_image_to_window(data->ptr, data->win, data->player, (x + 1) * 64, y * 64);
+        mlx_put_image_to_window(data->ptr, data->win, data->player, (x - 1) * 64, y * 64);
         mlx_put_image_to_window(data->ptr, data->win, data->ground, x * 64, y * 64);
-        map[y][x + 1] = 'P';
+        map[y][x - 1] = 'P';
         map[y][x] = '0';
     }
 }
@@ -163,9 +163,9 @@ void ft_right(t_data *data)
         return;
     else
     {
-        mlx_put_image_to_window(data->ptr, data->win, data->player, (x - 1) * 64, y * 64);
+        mlx_put_image_to_window(data->ptr, data->win, data->player, (x + 1) * 64, y * 64);
         mlx_put_image_to_window(data->ptr, data->win, data->ground, x * 64, y * 64);
-        map[y][x - 1] = 'P';
+        map[y][x + 1] = 'P';
         map[y][x] = '0';
     }
 }
@@ -179,9 +179,9 @@ int key_hand(int key, t_data *data)
     if (key == XK_Down)
         ft_down(data);
     if (key == XK_Left)
-        ft_right(data);
-    if (key == XK_Right)
         ft_left(data);
+    if (key == XK_Right)
+        ft_right(data);
     return (0);
 }
 
