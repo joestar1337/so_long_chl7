@@ -51,7 +51,7 @@ void ft_down(t_data *data)
     }
     if (map[y + 1][x] == '1')
         return;
-    else if (map[y + 1][x] == '0')
+    else
     {
         mlx_put_image_to_window(data->ptr, data->win, data->player, x * 64, (y + 1) * 64);
         mlx_put_image_to_window(data->ptr, data->win, data->ground, x * 64, y * 64);
@@ -89,7 +89,7 @@ void ft_up(t_data *data)
     }
     if (map[y - 1][x] == '1')
         return;
-    else if (map[y - 1][x] == '0')
+    else
     {
         mlx_put_image_to_window(data->ptr, data->win, data->player, x * 64, (y - 1) * 64);
         mlx_put_image_to_window(data->ptr, data->win, data->ground, x * 64, y * 64);
@@ -125,7 +125,7 @@ void ft_left(t_data *data)
     }
     if (map[y][x + 1] == '1')
         return;
-    else if (map[y][x + 1] == '0')
+    else
     {
         mlx_put_image_to_window(data->ptr, data->win, data->player, (x + 1) * 64, y * 64);
         mlx_put_image_to_window(data->ptr, data->win, data->ground, x * 64, y * 64);
@@ -161,7 +161,7 @@ void ft_right(t_data *data)
     }
     if (map[y][x + 1] == '1')
         return;
-    else if (map[y][x - 1] == '0')
+    else
     {
         mlx_put_image_to_window(data->ptr, data->win, data->player, (x - 1) * 64, y * 64);
         mlx_put_image_to_window(data->ptr, data->win, data->ground, x * 64, y * 64);
@@ -182,6 +182,7 @@ int key_hand(int key, t_data *data)
         ft_right(data);
     if (key == XK_Right)
         ft_left(data);
+    return (0);
 }
 
 
@@ -189,7 +190,7 @@ char	**ft_split(char const *s, char c);
 
 int main(int c, char **v)
 {
-    if (!v[1])
+    if (!v[1] || c != 2)
         return (1);
     int fd = open(v[1], 0);
     if (fd == -1)
@@ -216,10 +217,10 @@ int main(int c, char **v)
 
     void *ptr = mlx_init();
     void *win = mlx_new_window(ptr, strlen(map2d[0]) * 64, row * 64, "taha zaml");
-    void *ground = mlx_xpm_file_to_image(ptr, "tmounir.xpm", &w, &h);
-    void *wall = mlx_xpm_file_to_image(ptr, "tamounir.xpm", &w, &h);
+    void *ground = mlx_xpm_file_to_image(ptr, "background.xpm", &w, &h);
+    void *wall = mlx_xpm_file_to_image(ptr, "-42.xpm", &w, &h);
     void *coin = mlx_xpm_file_to_image(ptr, "amlo.xpm", &w, &h);
-    void *player = mlx_xpm_file_to_image(ptr, "player.xpm", &w, &h);
+    void *player = mlx_xpm_file_to_image(ptr, "tamounir.xpm", &w, &h);
 
     while (y < row)
     {
